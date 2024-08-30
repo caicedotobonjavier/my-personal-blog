@@ -1,0 +1,23 @@
+{% extends 'home/base_home.html' %}
+
+{% load static %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<main class="home-main">
+    <div class="main-container">
+        <p class="main-container__text">
+            Conoce un poco de mi y todos mis proyectos en Python, Django, Django RestFramework, Fastapi, Flask, Tkinter y un poco de css y html
+        </p>
+        <a class="main-container__link" href="">Entra ya!</a>
+    </div>
+</main>
+
+
+{% endblock content %}
