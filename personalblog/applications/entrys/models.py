@@ -5,6 +5,8 @@ from model_utils.models import TimeStampedModel
 from ckeditor.fields import RichTextField
 #
 from django.conf import settings
+#
+from .managers import EntryManagers
 # Create your models here.
 
 class Category(TimeStampedModel):
@@ -23,15 +25,17 @@ class Category(TimeStampedModel):
 
 
 class Entry(TimeStampedModel):
-    category = models.ForeignKey(Category, related_name='entry_category', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='entry_category', verbose_name='Categoria', on_delete=models.CASCADE)
     title = models.CharField('Titulo', max_length=50)
     resumen = models.CharField('Resumen', max_length=50, blank=True, null=True)
     content = RichTextField('Contenido')
     imagen = models.ImageField('Imagen', upload_to='publicaciones', blank=True, null=True)
     active = models.BooleanField('Activo', default=True)
     in_home = models.BooleanField('En Home', default=False)
-    portada = models.BooleanField('POrtada', default=False)
+    portada = models.BooleanField('Portada', default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='entry_user', on_delete=models.CASCADE)
+
+    objects = EntryManagers()
 
     class Meta:
         verbose_name = 'Entrada'

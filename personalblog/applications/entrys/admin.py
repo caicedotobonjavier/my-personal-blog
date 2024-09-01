@@ -14,11 +14,15 @@ admin.site.register(Category, CategoryAdmin)
 
 class EntryAdmin(admin.ModelAdmin):
     list_display =(
+        'category',
         'title',
         'resumen',
+        'content',
+        'imagen',
         'created',
         'active',
         'in_home',
+        'portada',
         'user',
     )
     search_fields = (

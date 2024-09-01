@@ -1,0 +1,56 @@
+<div style="text-align:center;">
+    <h1>Entradas del Blog</h1>
+    <a href="{% url 'entry_app:new_entrys' %}">Crear nueva entrada</a><br>
+    <a href="{% url 'home_app:home' %}">Ir al Inicio</a>
+
+    <form method="GET">
+        <input type="text" placeholder="Buscar por titulo" id="titulo" name="titulo"><br>
+        <input type="text" placeholder="Buscar por categoria" id="categoria" name="categoria"><br>
+        <button>Buscar</button>
+    </form>
+    
+    <ol>
+        {% for entrada in entradas%}
+            <li>
+                <p><b>Categoria : </b>{{entrada.category.name}}</p>
+                <p><b>Titulo : </b>{{entrada.title}}</p>
+                <p><b>Resumen : </b>{{entrada.resumen}}</p>
+                <p><b>Publicado por: </b>{{entrada.user.full_name}}</p>
+                <img src="{{ entrada.imagen.url }}"  width="300" height="300">            
+                <p><b>Contenido : </b>{{entrada.content|safe}}</p>
+                <hr>
+            </li>
+        {% endfor %}
+    </ol>
+
+    <div class="cell">
+        {% if is_paginated %}
+        <nav aria-label="Pagination">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="pagination-previous">
+                    <a href="?page={{page_obj.previous_page_number}}">Atras</a>
+                </li>
+                {% endif %}
+    
+                {% for pagina in paginator.page_range %}
+                
+                {% if pagina == page_obj.number %} 
+                <li class="current"><span class="show-for-sr">Pagina: </span>{{pagina}}</li>
+                {% else %}
+                <li class=""><a href="?page={{pagina}}">{{pagina}}</a></li>
+                {% endif %} 
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                <li class="pagination-next">
+                    <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}            
+    </div>
+    <!-- FIN PAGINACION--> 
+
+</div> 

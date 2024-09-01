@@ -1,0 +1,12 @@
+
+<div style="text-align:center;">    
+    <h1>Crear nueva entrada</h1>
+    <a href="{% url 'entry_app:list_entrys' %}">Ver Publicaciones</a>
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Guardar</button>
+    </form>
+<b>Correo contacto : </b> <span style="color:black; background:red;">{{email}}</span><br>
+<b>Telefono contacto : </b> <span style="color:black; background:red;">{{telefono}}</span>
+</div>
